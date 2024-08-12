@@ -15,7 +15,7 @@ namespace TradersChamp.View.Admin
 
         private void SetTabIndexes()
         {
-            
+
             txtBrand.TabIndex = 0;
             txtModel.TabIndex = 1;
             txtYear.TabIndex = 2;
@@ -59,9 +59,10 @@ namespace TradersChamp.View.Admin
                 InteriorColor = txtInteriorColor.Text,
                 NumOfDoors = txtDoors.Text,
                 SeatingCapacity = txtSeatingCapacity.Text,
+                Price = Convert.ToDouble(txtPrice.Text),
                 CreatedAt = DateTime.Now,
                 UpdatedAt = DateTime.Now
-                
+
             };
 
             using (var db = new ApplicationDBContext())
@@ -90,6 +91,27 @@ namespace TradersChamp.View.Admin
             }
 
 
+        }
+
+        private void txtPrice_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Allow control keys (backspace, delete, etc.)
+            if (char.IsControl(e.KeyChar))
+            {
+                return;
+            }
+
+            // Allow digits and one decimal point
+            if (!char.IsDigit(e.KeyChar) && e.KeyChar != '.')
+            {
+                e.Handled = true;
+            }
+
+            // Allow only one decimal point
+            if (e.KeyChar == '.' && (sender as TextBox).Text.Contains("."))
+            {
+                e.Handled = true;
+            }
         }
     }
 }

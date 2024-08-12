@@ -26,7 +26,7 @@ namespace TradersChamp.View.Admin
             txtTransmission.TabIndex = 5;
             txtDrivetrain.TabIndex = 6;
             txtFuelType.TabIndex = 7;
-            txtMileage.TabIndex = 8;    
+            txtMileage.TabIndex = 8;
             txtVIN.TabIndex = 9;
             txtColor.TabIndex = 10;
             txtInteriorColor.TabIndex = 11;
@@ -53,6 +53,7 @@ namespace TradersChamp.View.Admin
             txtInteriorColor.Text = car.InteriorColor;
             txtDoors.Text = car.NumOfDoors;
             txtSeatingCapacity.Text = car.SeatingCapacity;
+            txtPrice.Text = Convert.ToString(car.Price);
         }
 
         private void btnUpdate_Click(object sender, EventArgs e)
@@ -80,6 +81,7 @@ namespace TradersChamp.View.Admin
                 car.InteriorColor = txtInteriorColor.Text;
                 car.NumOfDoors = txtDoors.Text;
                 car.SeatingCapacity = txtSeatingCapacity.Text;
+                car.Price = Convert.ToDouble(txtPrice.Text);
                 car.UpdatedAt = DateTime.Now;
                 db.SaveChanges();
             }
@@ -89,6 +91,25 @@ namespace TradersChamp.View.Admin
 
         }
 
+        private void txtPrice_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Allow control keys (backspace, delete, etc.)
+            if (char.IsControl(e.KeyChar))
+            {
+                return;
+            }
 
+            // Allow digits and one decimal point
+            if (!char.IsDigit(e.KeyChar) && e.KeyChar != '.')
+            {
+                e.Handled = true;
+            }
+
+            // Allow only one decimal point
+            if (e.KeyChar == '.' && (sender as TextBox).Text.Contains("."))
+            {
+                e.Handled = true;
+            }
+        }
     }
 }

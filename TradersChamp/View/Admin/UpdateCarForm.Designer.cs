@@ -44,6 +44,7 @@
             txtInteriorColor = new TextBox();
             btnUpdate = new Button();
             label1 = new Label();
+            txtPrice = new TextBox();
             SuspendLayout();
             // 
             // txtBrand
@@ -64,7 +65,7 @@
             // 
             // txtFuelType
             // 
-            txtFuelType.Location = new Point(209, 56);
+            txtFuelType.Location = new Point(12, 259);
             txtFuelType.Name = "txtFuelType";
             txtFuelType.PlaceholderText = " Fuel Type";
             txtFuelType.Size = new Size(191, 23);
@@ -80,7 +81,7 @@
             // 
             // txtMileage
             // 
-            txtMileage.Location = new Point(209, 85);
+            txtMileage.Location = new Point(209, 56);
             txtMileage.Name = "txtMileage";
             txtMileage.PlaceholderText = " Mileage";
             txtMileage.Size = new Size(191, 23);
@@ -96,7 +97,7 @@
             // 
             // txtVIN
             // 
-            txtVIN.Location = new Point(209, 114);
+            txtVIN.Location = new Point(209, 85);
             txtVIN.Name = "txtVIN";
             txtVIN.PlaceholderText = " VIN";
             txtVIN.Size = new Size(191, 23);
@@ -112,7 +113,7 @@
             // 
             // txtColor
             // 
-            txtColor.Location = new Point(209, 143);
+            txtColor.Location = new Point(209, 114);
             txtColor.Name = "txtColor";
             txtColor.PlaceholderText = " Color";
             txtColor.Size = new Size(191, 23);
@@ -128,7 +129,7 @@
             // 
             // txtDoors
             // 
-            txtDoors.Location = new Point(209, 201);
+            txtDoors.Location = new Point(209, 172);
             txtDoors.Name = "txtDoors";
             txtDoors.PlaceholderText = " Doors Count";
             txtDoors.Size = new Size(191, 23);
@@ -136,7 +137,7 @@
             // 
             // txtSeatingCapacity
             // 
-            txtSeatingCapacity.Location = new Point(209, 230);
+            txtSeatingCapacity.Location = new Point(209, 201);
             txtSeatingCapacity.Name = "txtSeatingCapacity";
             txtSeatingCapacity.PlaceholderText = " Seating Capacity";
             txtSeatingCapacity.Size = new Size(191, 23);
@@ -152,7 +153,7 @@
             // 
             // txtInteriorColor
             // 
-            txtInteriorColor.Location = new Point(209, 172);
+            txtInteriorColor.Location = new Point(209, 143);
             txtInteriorColor.Name = "txtInteriorColor";
             txtInteriorColor.PlaceholderText = " Interior Color";
             txtInteriorColor.Size = new Size(191, 23);
@@ -160,7 +161,7 @@
             // 
             // btnUpdate
             // 
-            btnUpdate.Location = new Point(325, 259);
+            btnUpdate.Location = new Point(325, 296);
             btnUpdate.Name = "btnUpdate";
             btnUpdate.Size = new Size(75, 23);
             btnUpdate.TabIndex = 1;
@@ -178,6 +179,15 @@
             label1.TabIndex = 2;
             label1.Text = "Update Car Details";
             // 
+            // txtPrice
+            // 
+            txtPrice.Location = new Point(209, 230);
+            txtPrice.Name = "txtPrice";
+            txtPrice.PlaceholderText = " Price";
+            txtPrice.Size = new Size(191, 23);
+            txtPrice.TabIndex = 0;
+            txtPrice.KeyPress += txtPrice_KeyPress;
+            // 
             // UpdateCarForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -191,6 +201,7 @@
             Controls.Add(txtFuelType);
             Controls.Add(txtEngine);
             Controls.Add(txtYear);
+            Controls.Add(txtPrice);
             Controls.Add(txtSeatingCapacity);
             Controls.Add(txtMileage);
             Controls.Add(txtDoors);
@@ -224,5 +235,6 @@
         private TextBox txtInteriorColor;
         private Button btnUpdate;
         private Label label1;
+        private TextBox txtPrice;
     }
 }
