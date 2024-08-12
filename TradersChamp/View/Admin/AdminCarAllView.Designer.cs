@@ -28,39 +28,30 @@
         /// </summary>
         private void InitializeComponent()
         {
-            textBox1 = new TextBox();
+            txtSearch = new TextBox();
             btnAddNew = new Button();
-            button1 = new Button();
             tblData = new DataGridView();
             ((System.ComponentModel.ISupportInitialize)tblData).BeginInit();
             SuspendLayout();
             // 
-            // textBox1
+            // txtSearch
             // 
-            textBox1.Location = new Point(12, 12);
-            textBox1.Name = "textBox1";
-            textBox1.PlaceholderText = "Search by any detail";
-            textBox1.Size = new Size(265, 23);
-            textBox1.TabIndex = 0;
+            txtSearch.Location = new Point(12, 12);
+            txtSearch.Name = "txtSearch";
+            txtSearch.PlaceholderText = " Search by any detail";
+            txtSearch.Size = new Size(265, 23);
+            txtSearch.TabIndex = 0;
+            txtSearch.KeyDown += txtSearch_KeyDown;
             // 
             // btnAddNew
             // 
-            btnAddNew.Location = new Point(935, 12);
+            btnAddNew.Location = new Point(1496, 12);
             btnAddNew.Name = "btnAddNew";
             btnAddNew.Size = new Size(75, 23);
             btnAddNew.TabIndex = 1;
             btnAddNew.Text = "Add New";
             btnAddNew.UseVisualStyleBackColor = true;
             btnAddNew.Click += btnAddNew_Click;
-            // 
-            // button1
-            // 
-            button1.Location = new Point(283, 12);
-            button1.Name = "button1";
-            button1.Size = new Size(75, 23);
-            button1.TabIndex = 1;
-            button1.Text = "Search";
-            button1.UseVisualStyleBackColor = true;
             // 
             // tblData
             // 
@@ -79,9 +70,8 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1583, 583);
             Controls.Add(tblData);
-            Controls.Add(button1);
             Controls.Add(btnAddNew);
-            Controls.Add(textBox1);
+            Controls.Add(txtSearch);
             FormBorderStyle = FormBorderStyle.None;
             Name = "AdminCarAllView";
             Text = "AdminCarAllView";
@@ -92,9 +82,8 @@
 
         #endregion
 
-        private TextBox textBox1;
+        private TextBox txtSearch;
         private Button btnAddNew;
-        private Button button1;
         private DataGridView tblData;
     }
 }

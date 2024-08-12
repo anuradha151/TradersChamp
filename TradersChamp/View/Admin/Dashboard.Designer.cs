@@ -30,6 +30,7 @@
         {
             pnlHeader = new Panel();
             btnCar = new Button();
+            btnCustomer = new Button();
             btnCarParts = new Button();
             lblDashboard = new Label();
             pnlMain = new Panel();
@@ -39,6 +40,7 @@
             // pnlHeader
             // 
             pnlHeader.Controls.Add(btnCar);
+            pnlHeader.Controls.Add(btnCustomer);
             pnlHeader.Controls.Add(btnCarParts);
             pnlHeader.Controls.Add(lblDashboard);
             pnlHeader.Dock = DockStyle.Top;
@@ -56,6 +58,15 @@
             btnCar.Text = "Car";
             btnCar.UseVisualStyleBackColor = true;
             btnCar.Click += btnCar_Click;
+            // 
+            // btnCustomer
+            // 
+            btnCustomer.Location = new Point(323, 12);
+            btnCustomer.Name = "btnCustomer";
+            btnCustomer.Size = new Size(75, 73);
+            btnCustomer.TabIndex = 1;
+            btnCustomer.Text = "Customer";
+            btnCustomer.UseVisualStyleBackColor = true;
             // 
             // btnCarParts
             // 
@@ -107,5 +118,6 @@
         private Button btnCar;
         private Button btnCarParts;
         private Label lblDashboard;
+        private Button btnCustomer;
     }
 }
