@@ -1,6 +1,6 @@
 ﻿namespace TradersChamp.View.Admin
 {
-    partial class AdminCarAllView
+    partial class ViewAllCars
     {
         /// <summary>
         /// Required designer variable.

@@ -38,7 +38,7 @@ namespace TradersChamp.View.Auth
                     return;
                 }
                 user.Status = "ACTIVE";
-                user.UpdatedDate = DateTime.Now;
+                user.UpdatedAt = DateTime.Now;
                 db.SaveChanges();
                 MessageBox.Show("Account activated successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.Hide();

@@ -4,10 +4,10 @@ using TradersChamp.Util;
 
 namespace TradersChamp.View.Admin
 {
-    public partial class CarPartAdd : Form
+    public partial class AddCarPart : Form
     {
         private Panel pnlMain;
-        public CarPartAdd(Panel pnlMain)
+        public AddCarPart(Panel pnlMain)
         {
             InitializeComponent();
             this.pnlMain = pnlMain;
@@ -37,7 +37,7 @@ namespace TradersChamp.View.Admin
                 db.SaveChanges();
             }
             MessageBox.Show("Car part added successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            Utility.LoadForm(new CarPartAllView(pnlMain), pnlMain);
+            Utility.LoadForm(new ViewAllCarParts(pnlMain), pnlMain);
             
         }
 

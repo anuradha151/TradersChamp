@@ -75,8 +75,8 @@ namespace TradersChamp.View
                     Role = "USER",
                     Status = "OTP_NOT_VERIFIED",
                     Otp = otp,
-                    CreatedDate = DateTime.Now,
-                    UpdatedDate = DateTime.Now
+                    CreatedAt = DateTime.Now,
+                    UpdatedAt = DateTime.Now
                     
                 };
                 db.User.Add(user);

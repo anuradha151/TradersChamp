@@ -3,10 +3,10 @@ using TradersChamp.Util;
 
 namespace TradersChamp.View.Admin
 {
-    public partial class AddNewCarForm : Form
+    public partial class AddCar : Form
     {
         private Panel pnlMain;
-        public AddNewCarForm(Panel pnlMain)
+        public AddCar(Panel pnlMain)
         {
             this.pnlMain = pnlMain;
             InitializeComponent();
@@ -73,7 +73,7 @@ namespace TradersChamp.View.Admin
 
             MessageBox.Show("Car saved successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
             this.Close();
-            Utility.LoadForm(new AdminCarAllView(pnlMain), pnlMain);
+            Utility.LoadForm(new ViewAllCars(pnlMain), pnlMain);
         }
 
         private void ValidateInputs()

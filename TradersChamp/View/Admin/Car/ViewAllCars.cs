@@ -4,27 +4,22 @@ using TradersChamp.Util;
 
 namespace TradersChamp.View.Admin
 {
-    public partial class AdminCarAllView : Form
+    public partial class ViewAllCars : Form
     {
         private Panel pnlMain;
-        public AdminCarAllView(Panel pnlMain)
+        public ViewAllCars(Panel pnlMain)
         {
             InitializeComponent();
             this.pnlMain = pnlMain;
-            InitForm();
+            LoadTable();
         }
 
         private void btnAddNew_Click(object sender, EventArgs e)
         {
-            Utility.LoadForm(new AddNewCarForm(pnlMain), pnlMain);
+            Utility.LoadForm(new AddCar(pnlMain), pnlMain);
         }
 
-        private void InitForm()
-        {
-            LoadCarTable();
-        }
-
-        private void LoadCarTable()
+        private void LoadTable()
         {
             using (var db = new ApplicationDBContext())
             {
@@ -43,7 +38,7 @@ namespace TradersChamp.View.Admin
             {
                 var car = db.Car.Find(selectedRowId);
                 if (car == null) return;
-                Utility.LoadForm(new UpdateCarForm(pnlMain, car), pnlMain);                
+                Utility.LoadForm(new UpdateCar(pnlMain, car), pnlMain);
             }
 
         }
@@ -66,7 +61,8 @@ namespace TradersChamp.View.Admin
                                              c.Color.Contains(searchValue) ||
                                              c.InteriorColor.Contains(searchValue) ||
                                              c.NumOfDoors.Contains(searchValue) ||
-                                             c.SeatingCapacity.Contains(searchValue)).ToList();
+                                             c.SeatingCapacity.Contains(searchValue)                                             
+                                             ).ToList();
                 tblData.DataSource = cars;
 
             }

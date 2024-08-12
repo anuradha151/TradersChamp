@@ -12,10 +12,10 @@ using TradersChamp.Util;
 
 namespace TradersChamp.View.Admin
 {
-    public partial class CarPartAllView : Form
+    public partial class ViewAllCarParts : Form
     {
         private Panel pnlMain;
-        public CarPartAllView(Panel pnlMain)
+        public ViewAllCarParts(Panel pnlMain)
         {
             InitializeComponent();
             this.pnlMain = pnlMain;
@@ -34,7 +34,7 @@ namespace TradersChamp.View.Admin
 
         private void btnAddNew_Click(object sender, EventArgs e)
         {
-            Utility.LoadForm(new CarPartAdd(pnlMain), pnlMain);
+            Utility.LoadForm(new AddCarPart(pnlMain), pnlMain);
         }
 
         private void tblData_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -46,7 +46,7 @@ namespace TradersChamp.View.Admin
             {
                 var carPart = db.CarPart.Find(selectedRowId);
                 if (carPart == null) return;
-                Utility.LoadForm(new UpdateCarPartForm(pnlMain, carPart), pnlMain);
+                Utility.LoadForm(new UpdateCarPart(pnlMain, carPart), pnlMain);
             }
 
         }

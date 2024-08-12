@@ -67,6 +67,7 @@
             btnCustomer.TabIndex = 1;
             btnCustomer.Text = "Customer";
             btnCustomer.UseVisualStyleBackColor = true;
+            btnCustomer.Click += btnCustomer_Click;
             // 
             // btnCarParts
             // 

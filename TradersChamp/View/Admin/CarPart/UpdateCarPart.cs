@@ -4,11 +4,11 @@ using TradersChamp.Util;
 
 namespace TradersChamp.View.Admin
 {
-    public partial class UpdateCarPartForm : Form
+    public partial class UpdateCarPart : Form
     {
         private Panel pnlMain;
         private Guid id;
-        public UpdateCarPartForm(Panel pnlMain, CarPart carPart)
+        public UpdateCarPart(Panel pnlMain, CarPart carPart)
         {
             InitializeComponent();
             this.pnlMain = pnlMain;
@@ -52,7 +52,7 @@ namespace TradersChamp.View.Admin
                 db.SaveChanges();
             }
             MessageBox.Show("Car part updated successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            Utility.LoadForm(new CarPartAllView(pnlMain), pnlMain);
+            Utility.LoadForm(new ViewAllCarParts(pnlMain), pnlMain);
         }
 
         private void txtPrice_KeyPress(object sender, KeyPressEventArgs e)

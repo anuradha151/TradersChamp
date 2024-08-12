@@ -67,11 +67,11 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label1.Location = new Point(318, 105);
+            label1.Location = new Point(281, 106);
             label1.Name = "label1";
-            label1.Size = new Size(152, 30);
+            label1.Size = new Size(235, 30);
             label1.TabIndex = 2;
-            label1.Text = "TradersChamp";
+            label1.Text = "ABC Traders (PVT) Ltd.";
             // 
             // label2
             // 

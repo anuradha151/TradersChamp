@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using TradersChamp.Util;
 using TradersChamp.View.Admin;
+using TradersChamp.View.Admin.Customer;
 
 namespace TradersChamp.View
 {
@@ -23,13 +24,17 @@ namespace TradersChamp.View
 
         private void btnCar_Click(object sender, EventArgs e)
         {
-            Utility.LoadForm(new AdminCarAllView(pnlMain), pnlMain);
+            Utility.LoadForm(new ViewAllCars(pnlMain), pnlMain);
         }
 
         private void btnCarParts_Click(object sender, EventArgs e)
         {
-            Utility.LoadForm(new CarPartAllView(pnlMain), pnlMain);
+            Utility.LoadForm(new ViewAllCarParts(pnlMain), pnlMain);
         }
 
+        private void btnCustomer_Click(object sender, EventArgs e)
+        {
+            Utility.LoadForm(new ViewAllCustomers(pnlMain), pnlMain);
+        }
     }
 }

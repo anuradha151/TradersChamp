@@ -4,11 +4,11 @@ using TradersChamp.Util;
 
 namespace TradersChamp.View.Admin
 {
-    public partial class UpdateCarForm : Form
+    public partial class UpdateCar : Form
     {
         private Panel pnlMain;
         private Guid id;
-        public UpdateCarForm(Panel pnlMain, Car car)
+        public UpdateCar(Panel pnlMain, Car car)
         {
             InitializeComponent();
             this.pnlMain = pnlMain;
@@ -86,7 +86,7 @@ namespace TradersChamp.View.Admin
                 db.SaveChanges();
             }
             MessageBox.Show("Car updated successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            Utility.LoadForm(new AdminCarAllView(pnlMain), pnlMain);
+            Utility.LoadForm(new ViewAllCars(pnlMain), pnlMain);
 
 
         }
