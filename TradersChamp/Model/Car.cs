@@ -1,10 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TradersChamp.Model
 {
-    internal class Car
+    public class Car
     {
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid Id { get; set; }
         public string Brand { get; set; }
         public string Model { get; set; }
@@ -20,6 +22,8 @@ namespace TradersChamp.Model
         public string InteriorColor { get; set; }
         public string NumOfDoors { get; set; }
         public string SeatingCapacity { get; set; }
+        public DateTime? CreatedAt { get; set; }
+        public DateTime? UpdatedAt { get; set; }
 
     }
 }

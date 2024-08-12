@@ -22,6 +22,7 @@ namespace TradersChamp.Data
 
         public DbSet<User> User{ get; set; }
         public DbSet<Car> Car{ get; set; }
+        public DbSet<CarPart> CarPart{ get; set; }
 
     }
 }

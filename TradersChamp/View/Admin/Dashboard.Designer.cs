@@ -76,6 +76,7 @@
             btnCarParts.TabIndex = 1;
             btnCarParts.Text = "Car Parts";
             btnCarParts.UseVisualStyleBackColor = true;
+            btnCarParts.Click += btnCarParts_Click;
             // 
             // lblDashboard
             // 
