@@ -74,7 +74,6 @@
             txtFullName.PlaceholderText = " Full Name";
             txtFullName.Size = new Size(191, 23);
             txtFullName.TabIndex = 4;
-            
             // 
             // txtEmail
             // 
@@ -102,6 +101,7 @@
             // 
             // txtCreatedAt
             // 
+            txtCreatedAt.Enabled = false;
             txtCreatedAt.Location = new Point(209, 81);
             txtCreatedAt.Name = "txtCreatedAt";
             txtCreatedAt.PlaceholderText = " Registered Date";
