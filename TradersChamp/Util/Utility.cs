@@ -19,6 +19,14 @@ namespace TradersChamp.Util
             form.Show();
         }
 
+        internal static string GenerateOTPText()
+        {
+            return Guid.NewGuid().ToString()[..6];
+        }
 
+        internal static string GenerateOTPInt()
+        {
+            return new Random().Next(100000, 999999).ToString();
+        }
     }
 }

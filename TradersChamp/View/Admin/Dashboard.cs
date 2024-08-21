@@ -1,22 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using TradersChamp.Util;
+﻿using TradersChamp.Util;
 using TradersChamp.View.Admin;
 using TradersChamp.View.Admin.Customer;
+using TradersChamp.View.Admin.User;
 
 namespace TradersChamp.View
 {
     public partial class Dashboard : Form
     {
-
-        private Form activeForm;
         public Dashboard()
         {
             InitializeComponent();
@@ -35,6 +25,11 @@ namespace TradersChamp.View
         private void btnCustomer_Click(object sender, EventArgs e)
         {
             Utility.LoadForm(new ViewAllCustomers(pnlMain), pnlMain);
+        }
+
+        private void btnAdminManager_Click(object sender, EventArgs e)
+        {
+            Utility.LoadForm(new ViewAllAdmins(pnlMain), pnlMain);
         }
     }
 }

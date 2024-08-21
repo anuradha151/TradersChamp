@@ -58,6 +58,9 @@ namespace TradersChamp.View.Admin.Customer
                     .OrderByDescending(u => u.CreatedAt)
                     .ToList();
                 tblData.DataSource = data;
+                tblData.Columns["Id"].Visible = false;
+                tblData.Columns["Password"].Visible = false;
+                tblData.Columns["Otp"].Visible = false;
             }
         }
     }

@@ -30,6 +30,8 @@
         {
             pnlHeader = new Panel();
             btnCar = new Button();
+            btnAdminManager = new Button();
+            btnSettings = new Button();
             btnCustomer = new Button();
             btnCarParts = new Button();
             lblDashboard = new Label();
@@ -40,6 +42,8 @@
             // pnlHeader
             // 
             pnlHeader.Controls.Add(btnCar);
+            pnlHeader.Controls.Add(btnAdminManager);
+            pnlHeader.Controls.Add(btnSettings);
             pnlHeader.Controls.Add(btnCustomer);
             pnlHeader.Controls.Add(btnCarParts);
             pnlHeader.Controls.Add(lblDashboard);
@@ -58,6 +62,25 @@
             btnCar.Text = "Car";
             btnCar.UseVisualStyleBackColor = true;
             btnCar.Click += btnCar_Click;
+            // 
+            // btnAdminManager
+            // 
+            btnAdminManager.Location = new Point(1415, 12);
+            btnAdminManager.Name = "btnAdminManager";
+            btnAdminManager.Size = new Size(75, 73);
+            btnAdminManager.TabIndex = 1;
+            btnAdminManager.Text = "Admin Manager";
+            btnAdminManager.UseVisualStyleBackColor = true;
+            btnAdminManager.Click += btnAdminManager_Click;
+            // 
+            // btnSettings
+            // 
+            btnSettings.Location = new Point(1496, 12);
+            btnSettings.Name = "btnSettings";
+            btnSettings.Size = new Size(75, 73);
+            btnSettings.TabIndex = 1;
+            btnSettings.Text = "Settings";
+            btnSettings.UseVisualStyleBackColor = true;
             // 
             // btnCustomer
             // 
@@ -121,5 +144,7 @@
         private Button btnCarParts;
         private Label lblDashboard;
         private Button btnCustomer;
+        private Button btnAdminManager;
+        private Button btnSettings;
     }
 }

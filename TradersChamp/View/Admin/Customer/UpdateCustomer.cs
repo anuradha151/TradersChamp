@@ -1,15 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using TradersChamp.Data;
-using TradersChamp.Model;
+﻿using TradersChamp.Data;
 using TradersChamp.Util;
+using TradersChamp.Model;
 
 namespace TradersChamp.View.Admin.Customer
 {
@@ -17,7 +8,7 @@ namespace TradersChamp.View.Admin.Customer
     {
         private Panel pnlMain;
         private Guid id;
-        public UpdateCustomer(Panel pnlMain, User customer)
+        public UpdateCustomer(Panel pnlMain, Users customer)
         {
             InitializeComponent();
             this.pnlMain = pnlMain;
@@ -42,7 +33,7 @@ namespace TradersChamp.View.Admin.Customer
 
         }
 
-        private void UpdateInputs(User customer)
+        private void UpdateInputs(Users customer)
         {
             this.id = customer.Id;
             txtFullName.Text = customer.FullName;

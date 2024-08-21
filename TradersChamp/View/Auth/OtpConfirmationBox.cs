@@ -32,7 +32,7 @@ namespace TradersChamp.View.Auth
                     MessageBox.Show("User not found", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
-                if (user.Otp == null || user.Otp != int.Parse(otp))
+                if (user.Otp == null || user.Otp.Equals(otp))
                 {
                     MessageBox.Show("Invalid OTP", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;

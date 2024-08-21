@@ -20,7 +20,7 @@ namespace TradersChamp.Data
             optionsBuilder.UseSqlServer(configuration.GetConnectionString("DefaultConnection"));
         }
 
-        public DbSet<User> User{ get; set; }
+        public DbSet<Users> User{ get; set; }
         public DbSet<Car> Car{ get; set; }
         public DbSet<CarPart> CarPart{ get; set; }
 

@@ -12,11 +12,16 @@ using System.Windows.Forms;
 using TradersChamp.Data;
 using TradersChamp.Model;
 using TradersChamp.View.Auth;
+using TradersChamp.Util;
+using TradersChamp.Service;
 
 namespace TradersChamp.View
 {
     public partial class SignUp : Form
     {
+        // TODO - add dependency injection
+        private MailService MailService = new MailService();
+
         public SignUp()
         {
             InitializeComponent();
@@ -49,14 +54,14 @@ namespace TradersChamp.View
 
             using (var db = new ApplicationDBContext())
             {
-                
+
                 var userByEmail = db.User.Where(u => u.Email == txtEmail.Text).FirstOrDefault();
                 if (userByEmail != null)
                 {
                     MessageBox.Show("User with this email already exists", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
-                var userByUsername= db.User.Where(u => u.Username == txtUsername.Text).FirstOrDefault();
+                var userByUsername = db.User.Where(u => u.Username == txtUsername.Text).FirstOrDefault();
                 if (userByUsername != null)
                 {
                     MessageBox.Show("User with this username already exists", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -64,8 +69,8 @@ namespace TradersChamp.View
                 }
 
 
-                var otp = GetNewOtp();
-                var user = new User
+                var otp = Utility.GenerateOTPInt();
+                var user = new Users
                 {
                     Id = Guid.NewGuid(),
                     FullName = txtFullName.Text,
@@ -77,12 +82,19 @@ namespace TradersChamp.View
                     Otp = otp,
                     CreatedAt = DateTime.Now,
                     UpdatedAt = DateTime.Now
-                    
+
                 };
                 db.User.Add(user);
-                db.SaveChanges();               
+                db.SaveChanges();
 
-                SendOtpEmail(txtEmail.Text, otp.ToString());
+                MailService.SendEmail(
+                    user.Email,
+                     "Your OTP Code for ABC Traders",
+                     $"Dear User,\n\nYour One-Time Password (OTP) for completing your registration is: {otp}\n\n" +
+                              "Please enter this code in the application to verify your email address.\n\n" +
+                              "If you did not request this code, please ignore this email.\n\n" +
+                              "Best regards,\nABC Traders Team"
+                    );
                 ShowOtpConfirmationBox(user.Id);
                 this.Hide();
 
@@ -96,15 +108,10 @@ namespace TradersChamp.View
             otpConfirmationBox.Show();
         }
 
-        private int GetNewOtp()
-        {
-            return new Random().Next(100000, 999999);            
-        }
-
         private void ValidateInputs()
         {
             if (string.IsNullOrWhiteSpace(txtFullName.Text))
-            {               
+            {
                 MessageBox.Show("Full Name is required", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
@@ -132,38 +139,10 @@ namespace TradersChamp.View
             {
                 MessageBox.Show("Confirm Password is required", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
-            }            
+            }
 
         }
-        public void SendOtpEmail(string toEmail, string otp)
-        {
-            try
-            {
-                var client = new SmtpClient("sandbox.smtp.mailtrap.io", 2525)
-                {
-                    Credentials = new NetworkCredential("56fc7bb8e4051f", "327c1031e8fae8"),
-                    EnableSsl = true
-                };
-
-                string subject = "Your OTP Code for ABC Traders";
-                string body = $"Dear User,\n\nYour One-Time Password (OTP) for completing your registration is: {otp}\n\n" +
-                              "Please enter this code in the application to verify your email address.\n\n" +
-                              "If you did not request this code, please ignore this email.\n\n" +
-                              "Best regards,\nABC Traders Team";
-
-
-                
-                Console.WriteLine("Sending email to: " + toEmail);
-                client.Send("no-reply@abctraders.com", toEmail, subject, body);
-                Console.WriteLine("Email sent successfully to: " + toEmail);
-
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Failed to send email: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-        }
+ 
         private void SetTabIndexes()
         {
             txtFullName.TabIndex = 0;
