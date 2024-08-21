@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Extensions.DependencyInjection;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using TradersChamp.Data;
@@ -9,16 +10,19 @@ namespace TradersChamp
 {
     public partial class Login : Form
     {
-        public Login()
+        private readonly IServiceProvider _serviceProvider;
+        public Login(IServiceProvider serviceProvider)
         {
             InitializeComponent();
             setTabIndexes();
+            _serviceProvider = serviceProvider;
         }
 
         private void btnSignUp_Click(object sender, EventArgs e)
         {
             this.Hide();
-            new SignUp().Show();
+            var signUpForm = _serviceProvider.GetRequiredService<SignUp>();
+            signUpForm.Show();
         }
 
         private void setTabIndexes()
@@ -74,16 +78,7 @@ namespace TradersChamp
                     MessageBox.Show("Assigned role is not supported at the moment. \nPlease contact admin for more information", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
-
-
-
-                
-                
-
             }
-
-
-
         }
     }
 }

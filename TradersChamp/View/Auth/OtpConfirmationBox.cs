@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Extensions.DependencyInjection;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -13,12 +14,15 @@ namespace TradersChamp.View.Auth
 {
     public partial class OtpConfirmationBox : Form
     {
+
+        private readonly IServiceProvider _serviceProvider;
         private Guid Id;
 
-        public OtpConfirmationBox(Guid Id)
+        public OtpConfirmationBox(Guid Id, IServiceProvider serviceProvider)
         {
             InitializeComponent();
             this.Id = Id;
+            _serviceProvider = serviceProvider;
         }
 
         private void btnConfirm_Click(object sender, EventArgs e)
@@ -32,7 +36,7 @@ namespace TradersChamp.View.Auth
                     MessageBox.Show("User not found", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
-                if (user.Otp == null || user.Otp.Equals(otp))
+                if (user.Otp == null || !user.Otp.Equals(otp))
                 {
                     MessageBox.Show("Invalid OTP", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
@@ -42,7 +46,9 @@ namespace TradersChamp.View.Auth
                 db.SaveChanges();
                 MessageBox.Show("Account activated successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.Hide();
-                new Login().Show();
+                var loginForm = _serviceProvider.GetRequiredService<Login>();
+                loginForm.Show();
+
             }
 
         }

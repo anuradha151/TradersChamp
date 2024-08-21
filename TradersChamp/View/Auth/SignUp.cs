@@ -14,18 +14,21 @@ using TradersChamp.Model;
 using TradersChamp.View.Auth;
 using TradersChamp.Util;
 using TradersChamp.Service;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace TradersChamp.View
 {
     public partial class SignUp : Form
     {
-        // TODO - add dependency injection
-        private MailService MailService = new MailService();
+        private readonly IServiceProvider _serviceProvider;
+        private readonly MailService _mailService;
 
-        public SignUp()
+        public SignUp(IServiceProvider serviceProvider, MailService mailService)
         {
             InitializeComponent();
             InitForm();
+            _serviceProvider = serviceProvider;
+            _mailService = mailService;
         }
 
         private void InitForm()
@@ -36,7 +39,8 @@ namespace TradersChamp.View
         private void btnBack_Click(object sender, EventArgs e)
         {
             this.Hide();
-            new Login().Show();
+            var loginForm = _serviceProvider.GetRequiredService<Login>();
+            loginForm.Show();
         }
 
         private void btnSignUp_Click(object sender, EventArgs e)
@@ -87,7 +91,7 @@ namespace TradersChamp.View
                 db.User.Add(user);
                 db.SaveChanges();
 
-                MailService.SendEmail(
+                _mailService.SendEmail(
                     user.Email,
                      "Your OTP Code for ABC Traders",
                      $"Dear User,\n\nYour One-Time Password (OTP) for completing your registration is: {otp}\n\n" +
@@ -104,7 +108,7 @@ namespace TradersChamp.View
 
         private void ShowOtpConfirmationBox(Guid Id)
         {
-            OtpConfirmationBox otpConfirmationBox = new OtpConfirmationBox(Id);
+            OtpConfirmationBox otpConfirmationBox = new OtpConfirmationBox(Id, _serviceProvider);
             otpConfirmationBox.Show();
         }
 
@@ -142,7 +146,7 @@ namespace TradersChamp.View
             }
 
         }
- 
+
         private void SetTabIndexes()
         {
             txtFullName.TabIndex = 0;

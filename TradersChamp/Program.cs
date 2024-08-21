@@ -1,9 +1,13 @@
+using Microsoft.Extensions.DependencyInjection;
+using TradersChamp.Service;
 using TradersChamp.View;
 
 namespace TradersChamp
 {
     internal static class Program
     {
+        public static ServiceProvider ServiceProvider { get; private set; }
+
         /// <summary>
         ///  The main entry point for the application.
         /// </summary>
@@ -12,8 +16,25 @@ namespace TradersChamp
         {
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
-            ApplicationConfiguration.Initialize();
-            Application.Run(new Dashboard());
+            // ApplicationConfiguration.Initialize();
+            // Application.Run(new Login());
+
+            // Setup Dependency Injection
+            var services = new ServiceCollection();
+            ConfigureServices(services);
+
+            ServiceProvider = services.BuildServiceProvider();
+
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+            Application.Run(ServiceProvider.GetRequiredService<Login>());
+        }
+
+        private static void ConfigureServices(ServiceCollection services)
+        {
+            services.AddSingleton<MailService>(); 
+            services.AddTransient<SignUp>();
+            services.AddTransient<Login>();
         }
     }
 }
