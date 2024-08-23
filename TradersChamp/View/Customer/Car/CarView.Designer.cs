@@ -1,6 +1,6 @@
-﻿namespace TradersChamp.View.Admin
+﻿namespace TradersChamp.View.Customer.Car
 {
-    partial class ViewAllCars
+    partial class CarView
     {
         /// <summary>
         /// Required designer variable.
@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             txtSearch = new TextBox();
-            btnAddNew = new Button();
             tblData = new DataGridView();
             ((System.ComponentModel.ISupportInitialize)tblData).BeginInit();
             SuspendLayout();
@@ -40,18 +39,9 @@
             txtSearch.Name = "txtSearch";
             txtSearch.PlaceholderText = " Search by any detail";
             txtSearch.Size = new Size(265, 23);
-            txtSearch.TabIndex = 0;
-            txtSearch.KeyDown += txtSearch_KeyDown;
-            // 
-            // btnAddNew
-            // 
-            btnAddNew.Location = new Point(1496, 12);
-            btnAddNew.Name = "btnAddNew";
-            btnAddNew.Size = new Size(75, 23);
-            btnAddNew.TabIndex = 1;
-            btnAddNew.Text = "Add New";
-            btnAddNew.UseVisualStyleBackColor = true;
-            btnAddNew.Click += btnAddNew_Click;
+            txtSearch.TabIndex = 1;
+            txtSearch.TextChanged += txtSearch_TextChanged;
+            txtSearch.KeyPress += txtSearch_KeyPress;
             // 
             // tblData
             // 
@@ -61,20 +51,19 @@
             tblData.Name = "tblData";
             tblData.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             tblData.Size = new Size(1583, 542);
-            tblData.TabIndex = 3;
+            tblData.TabIndex = 4;
             tblData.CellDoubleClick += tblData_CellDoubleClick;
             // 
-            // ViewAllCars
+            // CarView
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1583, 583);
             Controls.Add(tblData);
-            Controls.Add(btnAddNew);
             Controls.Add(txtSearch);
             FormBorderStyle = FormBorderStyle.None;
-            Name = "ViewAllCars";
-            Text = "AdminCarAllView";
+            Name = "CarView";
+            Text = "CarView";
             ((System.ComponentModel.ISupportInitialize)tblData).EndInit();
             ResumeLayout(false);
             PerformLayout();
@@ -82,8 +71,8 @@
 
         #endregion
 
+        private Label label1;
         private TextBox txtSearch;
-        private Button btnAddNew;
         private DataGridView tblData;
     }
 }

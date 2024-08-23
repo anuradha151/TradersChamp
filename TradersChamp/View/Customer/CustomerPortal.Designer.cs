@@ -28,33 +28,99 @@
         /// </summary>
         private void InitializeComponent()
         {
-            label1 = new Label();
+            pnlHeader = new Panel();
+            btnCar = new Button();
+            btnSettings = new Button();
+            btnCarParts = new Button();
+            lblDashboard = new Label();
+            pnlMain = new Panel();
+            pnlHeader.SuspendLayout();
             SuspendLayout();
             // 
-            // label1
+            // pnlHeader
             // 
-            label1.AutoSize = true;
-            label1.Location = new Point(332, 204);
-            label1.Name = "label1";
-            label1.Size = new Size(93, 15);
-            label1.TabIndex = 0;
-            label1.Text = "Customer Portal";
+            pnlHeader.Controls.Add(btnCar);
+            pnlHeader.Controls.Add(btnSettings);
+            pnlHeader.Controls.Add(btnCarParts);
+            pnlHeader.Controls.Add(lblDashboard);
+            pnlHeader.Dock = DockStyle.Top;
+            pnlHeader.Location = new Point(0, 0);
+            pnlHeader.Name = "pnlHeader";
+            pnlHeader.Size = new Size(1583, 96);
+            pnlHeader.TabIndex = 1;
+            // 
+            // btnCar
+            // 
+            btnCar.Location = new Point(161, 12);
+            btnCar.Name = "btnCar";
+            btnCar.Size = new Size(75, 73);
+            btnCar.TabIndex = 1;
+            btnCar.Text = "Car";
+            btnCar.UseVisualStyleBackColor = true;
+            btnCar.Click += btnCar_Click;
+            // 
+            // btnSettings
+            // 
+            btnSettings.Enabled = false;
+            btnSettings.Location = new Point(1496, 12);
+            btnSettings.Name = "btnSettings";
+            btnSettings.Size = new Size(75, 73);
+            btnSettings.TabIndex = 1;
+            btnSettings.Text = "Settings";
+            btnSettings.UseVisualStyleBackColor = true;
+            // 
+            // btnCarParts
+            // 
+            btnCarParts.Location = new Point(242, 12);
+            btnCarParts.Name = "btnCarParts";
+            btnCarParts.Size = new Size(75, 73);
+            btnCarParts.TabIndex = 1;
+            btnCarParts.Text = "Car Parts";
+            btnCarParts.UseVisualStyleBackColor = true;
+            // 
+            // lblDashboard
+            // 
+            lblDashboard.AutoSize = true;
+            lblDashboard.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblDashboard.Location = new Point(10, 16);
+            lblDashboard.Name = "lblDashboard";
+            lblDashboard.Size = new Size(142, 64);
+            lblDashboard.TabIndex = 0;
+            lblDashboard.Text = "CUSTOMER\r\nPORTAL";
+            lblDashboard.TextAlign = ContentAlignment.MiddleCenter;
+            lblDashboard.Click += lblDashboard_Click;
+            // 
+            // pnlMain
+            // 
+            pnlMain.Dock = DockStyle.Bottom;
+            pnlMain.Location = new Point(0, 102);
+            pnlMain.Name = "pnlMain";
+            pnlMain.Size = new Size(1583, 583);
+            pnlMain.TabIndex = 2;
             // 
             // CustomerPortal
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
-            Controls.Add(label1);
+            ClientSize = new Size(1583, 685);
+            Controls.Add(pnlMain);
+            Controls.Add(pnlHeader);
             Name = "CustomerPortal";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "CustomerPortal";
+            Load += CustomerPortal_Load;
+            pnlHeader.ResumeLayout(false);
+            pnlHeader.PerformLayout();
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
 
-        private Label label1;
+        private Panel pnlHeader;
+        private Button btnCar;
+        private Button btnSettings;
+        private Button btnCarParts;
+        private Label lblDashboard;
+        private Panel pnlMain;
     }
 }

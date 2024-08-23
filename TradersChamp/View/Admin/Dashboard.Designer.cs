@@ -75,6 +75,7 @@
             // 
             // btnSettings
             // 
+            btnSettings.Enabled = false;
             btnSettings.Location = new Point(1496, 12);
             btnSettings.Name = "btnSettings";
             btnSettings.Size = new Size(75, 73);

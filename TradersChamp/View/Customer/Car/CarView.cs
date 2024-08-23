@@ -1,22 +1,26 @@
-﻿
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
 using TradersChamp.Data;
 using TradersChamp.Util;
+using TradersChamp.View.Admin;
 
-namespace TradersChamp.View.Admin
+namespace TradersChamp.View.Customer.Car
 {
-    public partial class ViewAllCars : Form
+    public partial class CarView : Form
     {
         private Panel pnlMain;
-        public ViewAllCars(Panel pnlMain)
+        public CarView(Panel pnlMain)
         {
             InitializeComponent();
             this.pnlMain = pnlMain;
             LoadTable();
-        }
-
-        private void btnAddNew_Click(object sender, EventArgs e)
-        {
-            Utility.LoadForm(new AddCar(pnlMain), pnlMain);
         }
 
         private void LoadTable()
@@ -29,21 +33,12 @@ namespace TradersChamp.View.Admin
             }
         }
 
-        private void tblData_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        private void txtSearch_TextChanged(object sender, EventArgs e)
         {
-            var selectedRow = tblData.Rows[e.RowIndex];
-            var selectedRowId = selectedRow.Cells["Id"].Value;
-
-            using (var db = new ApplicationDBContext())
-            {
-                var car = db.Car.Find(selectedRowId);
-                if (car == null) return;
-                Utility.LoadForm(new UpdateCar(pnlMain, car), pnlMain);
-            }
 
         }
 
-        private void txtSearch_KeyDown(object sender, KeyEventArgs e)
+        private void txtSearch_KeyPress(object sender, KeyPressEventArgs e)
         {
             var searchValue = txtSearch.Text;
             using (var db = new ApplicationDBContext())
@@ -64,7 +59,19 @@ namespace TradersChamp.View.Admin
                                              c.SeatingCapacity.Contains(searchValue)
                                              ).ToList();
                 tblData.DataSource = cars;
+            }
+        }
 
+        private void tblData_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            var selectedRow = tblData.Rows[e.RowIndex];
+            var selectedRowId = selectedRow.Cells["Id"].Value;
+
+            using (var db = new ApplicationDBContext())
+            {
+                var car = db.Car.Find(selectedRowId);
+                if (car == null) return;
+                Utility.LoadForm(new CarOrder(pnlMain, car), pnlMain);
             }
         }
     }
