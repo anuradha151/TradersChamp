@@ -369,7 +369,7 @@
             txtPrice.Name = "txtPrice";
             txtPrice.Size = new Size(100, 23);
             txtPrice.TabIndex = 6;
-            txtPrice.KeyPress += txtPrice_KeyPress;
+            txtPrice.TextChanged += txtPrice_TextChanged;
             // 
             // label3
             // 
@@ -398,7 +398,7 @@
             txtQty.Size = new Size(100, 23);
             txtQty.TabIndex = 6;
             txtQty.Text = "1";
-            txtQty.KeyPress += txtQty_KeyPress;
+            txtQty.TextChanged += txtQty_TextChanged;
             // 
             // txtTotal
             // 
@@ -408,7 +408,6 @@
             txtTotal.Name = "txtTotal";
             txtTotal.Size = new Size(100, 23);
             txtTotal.TabIndex = 6;
-            txtTotal.KeyPress += txtQty_KeyPress;
             // 
             // label6
             // 

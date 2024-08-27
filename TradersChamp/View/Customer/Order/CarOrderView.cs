@@ -11,6 +11,7 @@ using System.Windows.Forms;
 using TradersChamp.Data;
 using TradersChamp.Model;
 using TradersChamp.Util;
+using TradersChamp.View.Admin;
 
 namespace TradersChamp.View.Customer.Order
 {
@@ -27,15 +28,17 @@ namespace TradersChamp.View.Customer.Order
             this.Car = car;
             this.User = user;
             UpdateLabels();
-            UpdateTotal();
+            UpdateTotal(txtQty.Text, txtPrice.Text);
 
         }
 
-        private void UpdateTotal()
+        private void UpdateTotal(string Qty, string Price)
         {
-            txtTotal.Clear();
-            if (txtPrice.Text != "" && txtQty.Text != "")
-                txtTotal.Text = Convert.ToString(Convert.ToInt32(txtQty.Text) * Convert.ToInt32(txtPrice.Text));
+            if (int.TryParse(Qty, out int qty) && int.TryParse(Price, out int price))
+            {
+                txtTotal.Text = (qty * price).ToString();
+            }
+           
         }
 
         private void UpdateLabels()
@@ -52,30 +55,17 @@ namespace TradersChamp.View.Customer.Order
             lblMileage.Text = Car.Mileage;
             lblVIN.Text = Car.VIN;
             lblColor.Text = Car.Color;
-            lblInteriorColor.   Text = Car.InteriorColor;
+            lblInteriorColor.Text = Car.InteriorColor;
             lblDoorsCount.Text = Car.NumOfDoors;
             lblSeatingCapacity.Text = Car.SeatingCapacity;
             lblPrice.Text = Convert.ToString(Car.Price);
             txtPrice.Text = Convert.ToString(Car.Price);
         }
 
-        private void txtQty_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
-            {
-                e.Handled = true;
-            }
-            UpdateTotal();
-        }
-
-        private void txtPrice_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            UpdateTotal();
-        }
 
         private void btnOrder_Click(object sender, EventArgs e)
         {
-            
+
 
             var Qty = Convert.ToInt32(txtQty.Text);
             var Total = Convert.ToDouble(txtTotal.Text);
@@ -88,13 +78,29 @@ namespace TradersChamp.View.Customer.Order
                     UserId = User.Id,
                     Quantity = Qty,
                     Price = Total,
-                    CreatedAt = DateTime.Now
+                    PaymentMethod = "CASH",
+                    CreatedAt = DateTime.Now,
+                    UpdatedAt = DateTime.Now
+
                 };
 
-                db.CarOrder.Add(order); 
+                db.CarOrder.Add(order);
                 db.SaveChanges();
             }
+
+            MessageBox.Show("Your Car order is completed", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            this.Close();
+            Utility.LoadForm(new CarView(pnlMain, User), pnlMain);
         }
 
+        private void txtPrice_TextChanged(object sender, EventArgs e)
+        {
+            UpdateTotal(txtQty.Text, txtPrice.Text);
+        }
+
+        private void txtQty_TextChanged(object sender, EventArgs e)
+        {
+            UpdateTotal(txtQty.Text, txtPrice.Text);
+        }
     }
 }

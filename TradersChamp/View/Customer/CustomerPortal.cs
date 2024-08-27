@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using TradersChamp.Model;
 using TradersChamp.Util;
 using TradersChamp.View.Admin;
+using TradersChamp.View.Customer.CarParts;
 using TradersChamp.View.Customer.Order;
 
 namespace TradersChamp.View.Customer
@@ -36,6 +37,11 @@ namespace TradersChamp.View.Customer
         private void btnCar_Click(object sender, EventArgs e)
         {
             Utility.LoadForm(new CarView(pnlMain, User), pnlMain);
+        }
+
+        private void btnCarParts_Click(object sender, EventArgs e)
+        {
+            Utility.LoadForm(new CarPartsView(pnlMain, User), pnlMain);
         }
     }
 }

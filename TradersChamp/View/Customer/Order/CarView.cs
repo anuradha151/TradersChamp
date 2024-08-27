@@ -38,11 +38,6 @@ namespace TradersChamp.View.Customer.Order
 
         private void txtSearch_TextChanged(object sender, EventArgs e)
         {
-
-        }
-
-        private void txtSearch_KeyPress(object sender, KeyPressEventArgs e)
-        {
             var searchValue = txtSearch.Text;
             using (var db = new ApplicationDBContext())
             {

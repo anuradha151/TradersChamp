@@ -1,6 +1,6 @@
-﻿namespace TradersChamp.View.Customer.Order
+﻿namespace TradersChamp.View.Customer.CarParts
 {
-    partial class CarView
+    partial class CarPartsView
     {
         /// <summary>
         /// Required designer variable.
@@ -28,50 +28,62 @@
         /// </summary>
         private void InitializeComponent()
         {
-            txtSearch = new TextBox();
             tblData = new DataGridView();
+            txtSearch = new TextBox();
+            tblCarPartsOrder = new DataGridView();
             ((System.ComponentModel.ISupportInitialize)tblData).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)tblCarPartsOrder).BeginInit();
             SuspendLayout();
-            // 
-            // txtSearch
-            // 
-            txtSearch.Location = new Point(12, 12);
-            txtSearch.Name = "txtSearch";
-            txtSearch.PlaceholderText = " Search by any detail";
-            txtSearch.Size = new Size(265, 23);
-            txtSearch.TabIndex = 1;
-            txtSearch.TextChanged += txtSearch_TextChanged;
             // 
             // tblData
             // 
             tblData.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            tblData.Dock = DockStyle.Bottom;
             tblData.Location = new Point(0, 41);
             tblData.Name = "tblData";
             tblData.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            tblData.Size = new Size(1583, 542);
-            tblData.TabIndex = 4;
+            tblData.Size = new Size(501, 542);
+            tblData.TabIndex = 6;
             tblData.CellDoubleClick += tblData_CellDoubleClick;
             // 
-            // CarView
+            // txtSearch
+            // 
+            txtSearch.Location = new Point(12, 6);
+            txtSearch.Name = "txtSearch";
+            txtSearch.PlaceholderText = " Search by any detail";
+            txtSearch.Size = new Size(265, 23);
+            txtSearch.TabIndex = 5;
+            txtSearch.TextChanged += txtSearch_TextChanged;
+            // 
+            // tblCarPartsOrder
+            // 
+            tblCarPartsOrder.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            tblCarPartsOrder.Location = new Point(639, 82);
+            tblCarPartsOrder.Name = "tblCarPartsOrder";
+            tblCarPartsOrder.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            tblCarPartsOrder.Size = new Size(629, 225);
+            tblCarPartsOrder.TabIndex = 7;
+            // 
+            // CarPartsView
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1583, 583);
+            Controls.Add(tblCarPartsOrder);
             Controls.Add(tblData);
             Controls.Add(txtSearch);
             FormBorderStyle = FormBorderStyle.None;
-            Name = "CarView";
-            Text = "CarView";
+            Name = "CarPartsView";
+            Text = "CarPartsView";
             ((System.ComponentModel.ISupportInitialize)tblData).EndInit();
+            ((System.ComponentModel.ISupportInitialize)tblCarPartsOrder).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
 
-        private Label label1;
-        private TextBox txtSearch;
         private DataGridView tblData;
+        private TextBox txtSearch;
+        private DataGridView tblCarPartsOrder;
     }
 }
