@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using TradersChamp.Util;
 using TradersChamp.View.Admin;
-using TradersChamp.View.Customer.Car;
+using TradersChamp.View.Customer.Order;
 
 namespace TradersChamp.View.Customer
 {

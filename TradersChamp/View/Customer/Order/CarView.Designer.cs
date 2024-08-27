@@ -1,4 +1,4 @@
-﻿namespace TradersChamp.View.Customer.Car
+﻿namespace TradersChamp.View.Customer.Order
 {
     partial class CarView
     {

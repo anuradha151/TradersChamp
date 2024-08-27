@@ -1,4 +1,4 @@
-﻿namespace TradersChamp.View.Customer.Car
+﻿namespace TradersChamp.View.Customer.Order
 {
     partial class CarOrder
     {
@@ -59,6 +59,13 @@
             lblSeatingCapacity = new Label();
             label32 = new Label();
             lblPrice = new Label();
+            txtPrice = new TextBox();
+            label3 = new Label();
+            label4 = new Label();
+            txtQty = new TextBox();
+            txtTotal = new TextBox();
+            label6 = new Label();
+            btnOrder = new Button();
             SuspendLayout();
             // 
             // label1
@@ -118,7 +125,6 @@
             label8.Size = new Size(31, 15);
             label8.TabIndex = 5;
             label8.Text = "Year";
-            label8.Click += label8_Click;
             // 
             // lblYear
             // 
@@ -138,7 +144,6 @@
             label10.Size = new Size(66, 15);
             label10.TabIndex = 5;
             label10.Text = "Body Style";
-            label10.Click += label8_Click;
             // 
             // lblBodyStyle
             // 
@@ -158,7 +163,6 @@
             label12.Size = new Size(44, 15);
             label12.TabIndex = 5;
             label12.Text = "Engine";
-            label12.Click += label8_Click;
             // 
             // lblEngine
             // 
@@ -178,7 +182,6 @@
             label14.Size = new Size(77, 15);
             label14.TabIndex = 5;
             label14.Text = "Transmission";
-            label14.Click += label8_Click;
             // 
             // lblTransmission
             // 
@@ -198,7 +201,6 @@
             label16.Size = new Size(64, 15);
             label16.TabIndex = 5;
             label16.Text = "Drivetrain";
-            label16.Click += label8_Click;
             // 
             // lblDrivetrain
             // 
@@ -218,7 +220,6 @@
             label18.Size = new Size(59, 15);
             label18.TabIndex = 5;
             label18.Text = "Fuel Type";
-            label18.Click += label8_Click;
             // 
             // lblFuelType
             // 
@@ -238,7 +239,6 @@
             label20.Size = new Size(51, 15);
             label20.TabIndex = 5;
             label20.Text = "Mileage";
-            label20.Click += label8_Click;
             // 
             // lblMileage
             // 
@@ -258,7 +258,6 @@
             label22.Size = new Size(28, 15);
             label22.TabIndex = 5;
             label22.Text = "VIN";
-            label22.Click += label8_Click;
             // 
             // lblVIN
             // 
@@ -278,7 +277,6 @@
             label24.Size = new Size(36, 15);
             label24.TabIndex = 5;
             label24.Text = "Color";
-            label24.Click += label8_Click;
             // 
             // lblColor
             // 
@@ -298,7 +296,6 @@
             label26.Size = new Size(82, 15);
             label26.TabIndex = 5;
             label26.Text = "Interior Color";
-            label26.Click += label8_Click;
             // 
             // lblInteriorColor
             // 
@@ -318,7 +315,6 @@
             label28.Size = new Size(76, 15);
             label28.TabIndex = 5;
             label28.Text = "Doors Count";
-            label28.Click += label8_Click;
             // 
             // lblDoorsCount
             // 
@@ -338,7 +334,6 @@
             label30.Size = new Size(98, 15);
             label30.TabIndex = 5;
             label30.Text = "Seating Capacity";
-            label30.Click += label8_Click;
             // 
             // lblSeatingCapacity
             // 
@@ -358,7 +353,6 @@
             label32.Size = new Size(35, 15);
             label32.TabIndex = 5;
             label32.Text = "Price";
-            label32.Click += label8_Click;
             // 
             // lblPrice
             // 
@@ -369,11 +363,86 @@
             lblPrice.TabIndex = 5;
             lblPrice.Text = "lblPrice";
             // 
+            // txtPrice
+            // 
+            txtPrice.Enabled = false;
+            txtPrice.Location = new Point(405, 51);
+            txtPrice.Name = "txtPrice";
+            txtPrice.Size = new Size(100, 23);
+            txtPrice.TabIndex = 6;
+            txtPrice.KeyPress += txtPrice_KeyPress;
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label3.Location = new Point(323, 54);
+            label3.Name = "label3";
+            label3.Size = new Size(35, 15);
+            label3.TabIndex = 7;
+            label3.Text = "Price";
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label4.Location = new Point(323, 83);
+            label4.Name = "label4";
+            label4.Size = new Size(55, 15);
+            label4.TabIndex = 8;
+            label4.Text = "Quantity";
+            // 
+            // txtQty
+            // 
+            txtQty.Location = new Point(405, 80);
+            txtQty.Name = "txtQty";
+            txtQty.Size = new Size(100, 23);
+            txtQty.TabIndex = 6;
+            txtQty.Text = "1";
+            txtQty.KeyPress += txtQty_KeyPress;
+            // 
+            // txtTotal
+            // 
+            txtTotal.Enabled = false;
+            txtTotal.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            txtTotal.Location = new Point(405, 109);
+            txtTotal.Name = "txtTotal";
+            txtTotal.Size = new Size(100, 23);
+            txtTotal.TabIndex = 6;
+            txtTotal.KeyPress += txtQty_KeyPress;
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label6.Location = new Point(323, 112);
+            label6.Name = "label6";
+            label6.Size = new Size(34, 15);
+            label6.TabIndex = 8;
+            label6.Text = "Total";
+            // 
+            // btnOrder
+            // 
+            btnOrder.Location = new Point(430, 146);
+            btnOrder.Name = "btnOrder";
+            btnOrder.Size = new Size(75, 23);
+            btnOrder.TabIndex = 9;
+            btnOrder.Text = "Order";
+            btnOrder.UseVisualStyleBackColor = true;
+            btnOrder.Click += btnOrder_Click;
+            // 
             // CarOrder
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1567, 544);
+            Controls.Add(btnOrder);
+            Controls.Add(label6);
+            Controls.Add(label4);
+            Controls.Add(label3);
+            Controls.Add(txtTotal);
+            Controls.Add(txtQty);
+            Controls.Add(txtPrice);
             Controls.Add(lblPrice);
             Controls.Add(lblSeatingCapacity);
             Controls.Add(label32);
@@ -445,5 +514,12 @@
         private Label lblSeatingCapacity;
         private Label label32;
         private Label lblPrice;
+        private TextBox txtPrice;
+        private Label label3;
+        private Label label4;
+        private TextBox txtQty;
+        private TextBox txtTotal;
+        private Label label6;
+        private Button btnOrder;
     }
 }

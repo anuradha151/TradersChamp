@@ -11,7 +11,7 @@ using TradersChamp.Data;
 using TradersChamp.Util;
 using TradersChamp.View.Admin;
 
-namespace TradersChamp.View.Customer.Car
+namespace TradersChamp.View.Customer.Order
 {
     public partial class CarView : Form
     {
