@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using TradersChamp.Data;
+using TradersChamp.Model;
 using TradersChamp.Util;
 using TradersChamp.View.Admin;
 
@@ -16,10 +17,12 @@ namespace TradersChamp.View.Customer.Order
     public partial class CarView : Form
     {
         private Panel pnlMain;
-        public CarView(Panel pnlMain)
+        private Users User;
+        public CarView(Panel pnlMain, Users user)
         {
             InitializeComponent();
             this.pnlMain = pnlMain;
+            this.User = user;
             LoadTable();
         }
 
@@ -71,7 +74,7 @@ namespace TradersChamp.View.Customer.Order
             {
                 var car = db.Car.Find(selectedRowId);
                 if (car == null) return;
-                Utility.LoadForm(new CarOrder(pnlMain, car), pnlMain);
+                Utility.LoadForm(new CarOrderView(pnlMain, car, User), pnlMain);
             }
         }
     }

@@ -71,7 +71,7 @@ namespace TradersChamp
                 }else if(user.Role.Equals("USER"))
                 {
                     this.Hide();
-                    new CustomerPortal().Show();
+                    new CustomerPortal(user).Show();
                 }
                 else
                 {

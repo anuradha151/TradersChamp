@@ -1,4 +1,5 @@
 using Microsoft.Extensions.DependencyInjection;
+using TradersChamp.Model;
 using TradersChamp.Service;
 using TradersChamp.View;
 using TradersChamp.View.Customer;
@@ -28,7 +29,7 @@ namespace TradersChamp
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(ServiceProvider.GetRequiredService<CustomerPortal>());
+            Application.Run(ServiceProvider.GetRequiredService<Login>());
         }
 
         private static void ConfigureServices(ServiceCollection services)
@@ -36,6 +37,7 @@ namespace TradersChamp
             services.AddSingleton<MailService>(); 
             services.AddTransient<SignUp>();
             services.AddTransient<Login>();
+            services.AddTransient<Users>();
             services.AddTransient<CustomerPortal>();
         }
     }

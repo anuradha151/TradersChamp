@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TradersChamp.Model;
 using TradersChamp.Util;
 using TradersChamp.View.Admin;
 using TradersChamp.View.Customer.Order;
@@ -15,9 +16,11 @@ namespace TradersChamp.View.Customer
 {
     public partial class CustomerPortal : Form
     {
-        public CustomerPortal()
+        private Users User;
+        public CustomerPortal(Users user)
         {
             InitializeComponent();
+            this.User = user;
         }
 
         private void CustomerPortal_Load(object sender, EventArgs e)
@@ -32,7 +35,7 @@ namespace TradersChamp.View.Customer
 
         private void btnCar_Click(object sender, EventArgs e)
         {
-            Utility.LoadForm(new CarView(pnlMain), pnlMain);
+            Utility.LoadForm(new CarView(pnlMain, User), pnlMain);
         }
     }
 }
