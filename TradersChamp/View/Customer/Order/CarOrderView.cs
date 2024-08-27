@@ -34,6 +34,7 @@ namespace TradersChamp.View.Customer.Order
 
         private void UpdateTotal()
         {
+            txtTotal.Clear();
             if (txtPrice.Text != "" && txtQty.Text != "")
                 txtTotal.Text = Convert.ToString(Convert.ToInt32(txtQty.Text) * Convert.ToInt32(txtPrice.Text));
         }

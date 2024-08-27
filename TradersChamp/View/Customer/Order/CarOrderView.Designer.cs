@@ -365,7 +365,6 @@
             // 
             // txtPrice
             // 
-            txtPrice.Enabled = false;
             txtPrice.Location = new Point(405, 51);
             txtPrice.Name = "txtPrice";
             txtPrice.Size = new Size(100, 23);
@@ -431,7 +430,7 @@
             btnOrder.UseVisualStyleBackColor = true;
             btnOrder.Click += btnOrder_Click;
             // 
-            // CarOrder
+            // CarOrderView
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -475,7 +474,7 @@
             Controls.Add(label2);
             Controls.Add(label1);
             FormBorderStyle = FormBorderStyle.None;
-            Name = "CarOrder";
+            Name = "CarOrderView";
             Text = "CarOrder";
             ResumeLayout(false);
             PerformLayout();
