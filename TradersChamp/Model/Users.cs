@@ -20,5 +20,7 @@ namespace TradersChamp.Model
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
 
+        public ICollection<CarOrder> CarOrders { get; set; }
+
     }
 }

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace TradersChamp.Model
 {
-    internal class CarOrder
+    public class CarOrder
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]

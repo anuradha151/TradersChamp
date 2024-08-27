@@ -9,7 +9,6 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 using TradersChamp.Data;
-using TradersChamp.Migrations;
 using TradersChamp.Model;
 using TradersChamp.Util;
 

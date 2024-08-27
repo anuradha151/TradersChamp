@@ -106,7 +106,7 @@ namespace TradersChamp.View.Admin
             }
 
             // Allow only one decimal point
-            if (e.KeyChar == '.' && (sender as TextBox).Text.Contains("."))
+            if (e.KeyChar == '.' && sender is TextBox textBox && textBox.Text.Contains("."))
             {
                 e.Handled = true;
             }
