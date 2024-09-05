@@ -1,4 +1,5 @@
 using Microsoft.Extensions.DependencyInjection;
+using TradersChamp.Data;
 using TradersChamp.Model;
 using TradersChamp.Service;
 using TradersChamp.View;
@@ -35,6 +36,7 @@ namespace TradersChamp
         private static void ConfigureServices(ServiceCollection services)
         {
             services.AddSingleton<MailService>(); 
+            services.AddSingleton<ApplicationDBContext>();
             services.AddTransient<SignUp>();
             services.AddTransient<Login>();
             services.AddTransient<Users>();

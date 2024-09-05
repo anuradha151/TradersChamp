@@ -9,7 +9,7 @@ using TradersChamp.Model;
 
 namespace TradersChamp.Data
 {
-    internal class ApplicationDBContext : DbContext
+    public class ApplicationDBContext : DbContext
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

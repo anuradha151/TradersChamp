@@ -22,13 +22,15 @@ namespace TradersChamp.View
     {
         private readonly IServiceProvider _serviceProvider;
         private readonly MailService _mailService;
+        private readonly ApplicationDBContext _dbContext;
 
-        public SignUp(IServiceProvider serviceProvider, MailService mailService)
+        public SignUp(IServiceProvider serviceProvider, MailService mailService, ApplicationDBContext dBContext)
         {
             InitializeComponent();
             InitForm();
             _serviceProvider = serviceProvider;
             _mailService = mailService;
+            _dbContext = dBContext;
         }
 
         private void InitForm()
@@ -43,7 +45,7 @@ namespace TradersChamp.View
             loginForm.Show();
         }
 
-        private void btnSignUp_Click(object sender, EventArgs e)
+        private async void btnSignUp_Click(object sender, EventArgs e)
         {
             ValidateInputs();
 
@@ -56,55 +58,58 @@ namespace TradersChamp.View
                 return;
             }
 
-            using (var db = new ApplicationDBContext())
+            var userByEmail = _dbContext.User.Where(u => u.Email == txtEmail.Text).FirstOrDefault();
+            if (userByEmail != null)
             {
-
-                var userByEmail = db.User.Where(u => u.Email == txtEmail.Text).FirstOrDefault();
-                if (userByEmail != null)
-                {
-                    MessageBox.Show("User with this email already exists", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
-                var userByUsername = db.User.Where(u => u.Username == txtUsername.Text).FirstOrDefault();
-                if (userByUsername != null)
-                {
-                    MessageBox.Show("User with this username already exists", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
-
-
-                var otp = Utility.GenerateOTPInt();
-                var user = new Users
-                {
-                    Id = Guid.NewGuid(),
-                    FullName = txtFullName.Text,
-                    Username = txtUsername.Text,
-                    Email = txtEmail.Text,
-                    Password = txtPassword.Text,
-                    Role = "USER",
-                    Status = "OTP_NOT_VERIFIED",
-                    Otp = otp,
-                    CreatedAt = DateTime.Now,
-                    UpdatedAt = DateTime.Now
-
-                };
-                db.User.Add(user);
-                db.SaveChanges();
-
-                _mailService.SendEmail(
-                    user.Email,
-                     "Your OTP Code for ABC Traders",
-                     $"Dear User,\n\nYour One-Time Password (OTP) for completing your registration is: {otp}\n\n" +
-                              "Please enter this code in the application to verify your email address.\n\n" +
-                              "If you did not request this code, please ignore this email.\n\n" +
-                              "Best regards,\nABC Traders Team"
-                    );
-                ShowOtpConfirmationBox(user.Id);
-                this.Hide();
-
+                MessageBox.Show("User with this email already exists", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            var userByUsername = _dbContext.User.Where(u => u.Username == txtUsername.Text).FirstOrDefault();
+            if (userByUsername != null)
+            {
+                MessageBox.Show("User with this username already exists", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
             }
 
+            var otp = Utility.GenerateOTPInt();
+            var user = new Users
+            {
+                Id = Guid.NewGuid(),
+                FullName = txtFullName.Text,
+                Username = txtUsername.Text,
+                Email = txtEmail.Text,
+                Password = txtPassword.Text,
+                Role = "USER",
+                Status = "OTP_NOT_VERIFIED",
+                Otp = otp,
+                CreatedAt = DateTime.Now,
+                UpdatedAt = DateTime.Now
+            };
+            _dbContext.User.Add(user);
+            _dbContext.SaveChanges();
+
+            _mailService.SendEmailAsync(
+                user.Email,
+                "Your OTP Code for ABC Traders",
+                $"""
+                    Dear User,
+
+                    Your One-Time Password (OTP) for completing your registration is: {otp}
+
+                    Please enter this code in the application to verify your email address.
+                    If you did not request this code, please ignore this email.
+
+                    Best regards,
+                    ABC Traders Team
+                 """
+
+            );
+
+            ShowOtpConfirmationBox(user.Id);
+            this.Hide();
+
         }
+
 
         private void ShowOtpConfirmationBox(Guid Id)
         {

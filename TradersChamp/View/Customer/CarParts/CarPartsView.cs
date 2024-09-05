@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using TradersChamp.Data;
+using TradersChamp.Dto;
+using TradersChamp.Migrations;
 using TradersChamp.Model;
 
 namespace TradersChamp.View.Customer.CarParts
@@ -16,6 +18,9 @@ namespace TradersChamp.View.Customer.CarParts
     {
         private Panel pnlMain;
         private Users User;
+        private object selectedRowId;
+        private BindingList<CarPartCartItemDto> carParts = new BindingList<CarPartCartItemDto>();
+
         public CarPartsView(Panel pnlMain, Users User)
         {
             InitializeComponent();
@@ -50,7 +55,61 @@ namespace TradersChamp.View.Customer.CarParts
 
         private void tblData_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
+            var selectedRow = tblData.Rows[e.RowIndex];
+            this.selectedRowId = selectedRow.Cells["Id"].Value;
 
+            using (var db = new ApplicationDBContext())
+            {
+                var carPart = db.CarPart.Find(selectedRowId);
+                txtItemName.Text = carPart?.Name;
+                txtPrice.Text = carPart?.Price.ToString();
+                UpdateAmount(txtQty.Text, txtPrice.Text);
+            }
+
+        }
+
+        private void txtPrice_TextChanged(object sender, EventArgs e)
+        {
+            UpdateAmount(txtQty.Text, txtPrice.Text);
+        }
+
+        private void UpdateAmount(string Qty, string Price)
+        {
+            if (int.TryParse(Qty, out int qty) && double.TryParse(Price, out double price))
+            {
+                txtAmount.Text = (qty * price).ToString();
+            }
+
+        }
+
+        private void txtQty_TextChanged(object sender, EventArgs e)
+        {
+            UpdateAmount(txtQty.Text, txtPrice.Text);
+        }
+
+        private void btnAddToCart_Click(object sender, EventArgs e)
+        {
+            var carPartCartItemDto = new CarPartCartItemDto
+            {
+                ItemName = txtItemName.Text,
+                UnitPrice = Convert.ToDouble(txtPrice.Text),
+                Quantity = Convert.ToInt32(txtQty.Text),
+                Amount = Convert.ToDouble(txtAmount.Text)
+            };
+
+            carParts.Add(carPartCartItemDto);
+            UpdateCart();
+        }
+
+        private void UpdateCart()
+        {
+            tblCart.DataSource = carParts;
+            UpdateTotal();
+        }
+
+        private void UpdateTotal()
+        {
+            txtTotal.Text = carParts.Sum(c => c.Amount).ToString();
         }
     }
 }

@@ -46,7 +46,7 @@ namespace TradersChamp.View.Admin.User
                 };
                 db.User.Add(admin);
                 db.SaveChanges();
-                MailService.SendEmail(admin.Email, "OTP Verification", "Your OTP is " + otp);
+                MailService.SendEmailAsync(admin.Email, "OTP Verification", "Your OTP is " + otp);
             }
             MessageBox.Show("Admin added successfully. OTP has been sent to " + txtEmail.Text, "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
             this.Hide();

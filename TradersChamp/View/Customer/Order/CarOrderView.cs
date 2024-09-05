@@ -34,7 +34,7 @@ namespace TradersChamp.View.Customer.Order
 
         private void UpdateTotal(string Qty, string Price)
         {
-            if (int.TryParse(Qty, out int qty) && int.TryParse(Price, out int price))
+            if (int.TryParse(Qty, out int qty) && double.TryParse(Price, out double price))
             {
                 txtTotal.Text = (qty * price).ToString();
             }
