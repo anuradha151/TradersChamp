@@ -2,17 +2,23 @@
 using TradersChamp.Data;
 using TradersChamp.Model;
 using TradersChamp.Util;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace TradersChamp.View.Admin.User
 {
     public partial class ViewAllAdmins : Form
     {
+        private readonly IServiceProvider _serviceProvider;
+        private readonly Utility _utility;
+
         private Panel pnlMain;
         public ViewAllAdmins(Panel pnlMain)
         {
             InitializeComponent();
             this.pnlMain = pnlMain;
             LoadTable();
+            _serviceProvider = Program.ServiceProvider;
+            _utility = _serviceProvider.GetRequiredService<Utility>();
         }
 
         private void LoadTable()
@@ -32,6 +38,7 @@ namespace TradersChamp.View.Admin.User
             tblData.Columns["Password"].Visible = false;
             tblData.Columns["Otp"].Visible = false;
             tblData.Columns["Address"].Visible = false;
+            tblData.Columns["CarOrders"].Visible = false;
 
         }
 
@@ -57,13 +64,13 @@ namespace TradersChamp.View.Admin.User
             {
                 var data = db.User.Find(selectedRowId);
                 if (data == null) return;
-                Utility.LoadForm(new UpdateAdmin(pnlMain, data), pnlMain);
+                _utility.LoadForm(new UpdateAdmin(pnlMain, data), pnlMain);
             }
         }
 
         private void btnAddNew_Click(object sender, EventArgs e)
         {
-            Utility.LoadForm(new AddAdmin(pnlMain), pnlMain);
+            _utility.LoadForm(new AddAdmin(pnlMain), pnlMain);
         }
     }
 }

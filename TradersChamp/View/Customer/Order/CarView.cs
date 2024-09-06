@@ -1,21 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using System.Data;
 using TradersChamp.Data;
 using TradersChamp.Model;
 using TradersChamp.Util;
-using TradersChamp.View.Admin;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace TradersChamp.View.Customer.Order
 {
     public partial class CarView : Form
     {
+        private readonly IServiceProvider _serviceProvider;
+        private readonly Utility _utility;
+
         private Panel pnlMain;
         private Users User;
         public CarView(Panel pnlMain, Users user)
@@ -24,6 +19,10 @@ namespace TradersChamp.View.Customer.Order
             this.pnlMain = pnlMain;
             this.User = user;
             LoadTable();
+
+            _serviceProvider = Program.ServiceProvider;
+            _utility = _serviceProvider.GetRequiredService<Utility>();
+
         }
 
         private void LoadTable()
@@ -69,7 +68,7 @@ namespace TradersChamp.View.Customer.Order
             {
                 var car = db.Car.Find(selectedRowId);
                 if (car == null) return;
-                Utility.LoadForm(new CarOrderView(pnlMain, car, User), pnlMain);
+                _utility.LoadForm(new CarOrderView(pnlMain, car, User), pnlMain);
             }
         }
     }

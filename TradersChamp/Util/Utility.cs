@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace TradersChamp.Util
 {
     public class Utility
     {
-        public static void LoadForm(Form form, Panel panel)
+        public void LoadForm(Form form, Panel panel)
         {
             panel.Controls.Clear();
             form.TopLevel = false;
@@ -19,14 +20,10 @@ namespace TradersChamp.Util
             form.Show();
         }
 
-        internal static string GenerateOTPText()
-        {
-            return Guid.NewGuid().ToString()[..6];
-        }
-
-        internal static string GenerateOTPInt()
+        public string GenerateOTP()
         {
             return new Random().Next(100000, 999999).ToString();
         }
+
     }
 }

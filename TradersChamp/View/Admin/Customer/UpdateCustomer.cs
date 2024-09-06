@@ -1,11 +1,15 @@
 ﻿using TradersChamp.Data;
 using TradersChamp.Util;
 using TradersChamp.Model;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace TradersChamp.View.Admin.Customer
 {
     public partial class UpdateCustomer : Form
     {
+        private readonly IServiceProvider _serviceProvider;
+        private readonly Utility _utility;
+
         private Panel pnlMain;
         private Guid id;
         public UpdateCustomer(Panel pnlMain, Users customer)
@@ -14,6 +18,10 @@ namespace TradersChamp.View.Admin.Customer
             this.pnlMain = pnlMain;
             UpdateInputs(customer);
             SetTabIndexes();
+
+            _serviceProvider = Program.ServiceProvider;
+            _utility = _serviceProvider.GetRequiredService<Utility>();
+
 
 
         }
@@ -67,7 +75,7 @@ namespace TradersChamp.View.Admin.Customer
                 db.SaveChanges();
             }
             MessageBox.Show("Customer updated successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            Utility.LoadForm(new ViewAllCustomers(pnlMain), pnlMain);
+            _utility.LoadForm(new ViewAllCustomers(pnlMain), pnlMain);
 
         }
     }

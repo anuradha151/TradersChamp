@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using TradersChamp.Enums;
 
 namespace TradersChamp.Model
 {
@@ -23,6 +24,8 @@ namespace TradersChamp.Model
         public string NumOfDoors { get; set; }
         public string SeatingCapacity { get; set; }
         public double Price { get; set; }
+        [Column(TypeName = "varchar(20)")]
+        public CommonStatus Status { get; set; }
         public DateTime? CreatedAt { get; set; }
         public DateTime? UpdatedAt { get; set; }
 

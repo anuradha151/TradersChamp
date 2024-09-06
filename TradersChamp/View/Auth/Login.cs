@@ -11,11 +11,13 @@ namespace TradersChamp
     public partial class Login : Form
     {
         private readonly IServiceProvider _serviceProvider;
-        public Login(IServiceProvider serviceProvider)
+        private readonly ApplicationDBContext _dbContext;
+        public Login()
         {
             InitializeComponent();
             setTabIndexes();
-            _serviceProvider = serviceProvider;
+            _serviceProvider = Program.ServiceProvider;
+            _dbContext = _serviceProvider.GetRequiredService<ApplicationDBContext>();
         }
 
         private void btnSignUp_Click(object sender, EventArgs e)
@@ -44,41 +46,41 @@ namespace TradersChamp
                 return;
             }
 
-            
-            using(var db = new ApplicationDBContext())
+            var user = _dbContext.User.Where(u => u.Username == username || u.Email == username).FirstOrDefault();
+            if (user == null)
             {
-                var user = db.User.Where(u => u.Username == username || u.Email == username).FirstOrDefault();
-                if(user == null)
-                {
-                    MessageBox.Show("Invalid username or email", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
-                if(user.Password != password)
-                {
-                    MessageBox.Show("Invalid password", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
-                if(user.Status != "ACTIVE")
-                {
-                    MessageBox.Show("Account is not active. Contact Admin for more information", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
-                
-                if (user.Role.Equals("ADMIN"))
-                {
-                    this.Hide();
-                    new Dashboard().Show();
-                }else if(user.Role.Equals("USER"))
-                {
-                    this.Hide();
-                    new CustomerPortal(user).Show();
-                }
-                else
-                {
-                    MessageBox.Show("Assigned role is not supported at the moment. \nPlease contact admin for more information", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
+                MessageBox.Show("Invalid username or email", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
             }
+
+            if (!BCrypt.Net.BCrypt.Verify(password, user.Password))
+            {
+                MessageBox.Show("Invalid password", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            if (user.Status != "ACTIVE")
+            {
+                MessageBox.Show("Account is not active. Contact Admin for more information", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            if (user.Role.Equals("ADMIN"))
+            {
+                this.Hide();
+                new Dashboard().Show();
+            }
+            else if (user.Role.Equals("USER"))
+            {
+                this.Hide();
+                new CustomerPortal(user).Show();
+            }
+            else
+            {
+                MessageBox.Show("Assigned role is not supported at the moment. \nPlease contact admin for more information", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
         }
     }
 }

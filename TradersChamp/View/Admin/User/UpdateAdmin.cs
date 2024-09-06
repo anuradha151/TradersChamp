@@ -1,20 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using TradersChamp.Data;
+﻿using TradersChamp.Data;
 using TradersChamp.Model;
 using TradersChamp.Util;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace TradersChamp.View.Admin.User
 {
     public partial class UpdateAdmin : Form
     {
+        private readonly IServiceProvider _serviceProvider;
+        private readonly Utility _utility;
+
         private Panel pnlMain;
         private Guid id;
         public UpdateAdmin(Panel pnlMain, Users admin)
@@ -23,6 +18,10 @@ namespace TradersChamp.View.Admin.User
             this.pnlMain = pnlMain;
             LoadInputs(admin);
             SetTabIndexes();
+
+            _serviceProvider = Program.ServiceProvider;
+            _utility = _serviceProvider.GetRequiredService<Utility>();
+
         }
 
         private void SetTabIndexes()
@@ -69,7 +68,7 @@ namespace TradersChamp.View.Admin.User
                 db.SaveChanges();
             }
             MessageBox.Show("Admin updated successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            Utility.LoadForm(new ViewAllAdmins(pnlMain), pnlMain);
+            _utility.LoadForm(new ViewAllAdmins(pnlMain), pnlMain);
 
         }
     }

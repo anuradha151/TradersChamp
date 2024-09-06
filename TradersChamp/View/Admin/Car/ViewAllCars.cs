@@ -1,29 +1,37 @@
 ﻿
 using TradersChamp.Data;
 using TradersChamp.Util;
+using Microsoft.Extensions.DependencyInjection;
+using TradersChamp.Enums;
 
 namespace TradersChamp.View.Admin
 {
     public partial class ViewAllCars : Form
     {
+        private readonly IServiceProvider _serviceProvider;
+        private readonly Utility _utility;
+
         private Panel pnlMain;
         public ViewAllCars(Panel pnlMain)
         {
             InitializeComponent();
             this.pnlMain = pnlMain;
             LoadTable();
+            _serviceProvider = Program.ServiceProvider;
+            _utility = _serviceProvider.GetRequiredService<Utility>();
         }
 
         private void btnAddNew_Click(object sender, EventArgs e)
         {
-            Utility.LoadForm(new AddCar(pnlMain), pnlMain);
+            _utility.LoadForm(new AddCar(pnlMain), pnlMain);
         }
 
         private void LoadTable()
         {
             using (var db = new ApplicationDBContext())
             {
-                var cars = db.Car.OrderByDescending(c => c.UpdatedAt).ToList();
+                // load Status ACTIVE cars only orderby updatedAt descending
+                var cars = db.Car.Where(c => c.Status == CommonStatus.ACTIVE).OrderByDescending(c => c.UpdatedAt).ToList();
                 tblData.DataSource = cars;
                 tblData.Columns["Id"].Visible = false;
             }
@@ -38,7 +46,7 @@ namespace TradersChamp.View.Admin
             {
                 var car = db.Car.Find(selectedRowId);
                 if (car == null) return;
-                Utility.LoadForm(new UpdateCar(pnlMain, car), pnlMain);
+                _utility.LoadForm(new UpdateCar(pnlMain, car), pnlMain);
             }
 
         }

@@ -45,6 +45,8 @@
             btnUpdate = new Button();
             label1 = new Label();
             txtPrice = new TextBox();
+            btnClose = new Button();
+            btnDelete = new Button();
             SuspendLayout();
             // 
             // txtBrand
@@ -188,11 +190,33 @@
             txtPrice.TabIndex = 0;
             txtPrice.KeyPress += txtPrice_KeyPress;
             // 
-            // UpdateCarForm
+            // btnClose
+            // 
+            btnClose.Location = new Point(244, 296);
+            btnClose.Name = "btnClose";
+            btnClose.Size = new Size(75, 23);
+            btnClose.TabIndex = 3;
+            btnClose.Text = "Close";
+            btnClose.UseVisualStyleBackColor = true;
+            btnClose.Click += btnClose_Click;
+            // 
+            // btnDelete
+            // 
+            btnDelete.Location = new Point(12, 296);
+            btnDelete.Name = "btnDelete";
+            btnDelete.Size = new Size(75, 23);
+            btnDelete.TabIndex = 4;
+            btnDelete.Text = "Delete";
+            btnDelete.UseVisualStyleBackColor = true;
+            btnDelete.Click += btnDelete_Click;
+            // 
+            // UpdateCar
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1583, 583);
+            Controls.Add(btnDelete);
+            Controls.Add(btnClose);
             Controls.Add(label1);
             Controls.Add(txtBrand);
             Controls.Add(btnUpdate);
@@ -211,7 +235,7 @@
             Controls.Add(txtColor);
             Controls.Add(txtTransmission);
             FormBorderStyle = FormBorderStyle.None;
-            Name = "UpdateCarForm";
+            Name = "UpdateCar";
             Text = "UpdateCarForm";
             ResumeLayout(false);
             PerformLayout();
@@ -236,5 +260,7 @@
         private Button btnUpdate;
         private Label label1;
         private TextBox txtPrice;
+        private Button btnClose;
+        private Button btnDelete;
     }
 }

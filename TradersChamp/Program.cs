@@ -2,7 +2,10 @@ using Microsoft.Extensions.DependencyInjection;
 using TradersChamp.Data;
 using TradersChamp.Model;
 using TradersChamp.Service;
+using TradersChamp.Util;
 using TradersChamp.View;
+using TradersChamp.View.Admin;
+using TradersChamp.View.Admin.User;
 using TradersChamp.View.Customer;
 
 namespace TradersChamp
@@ -37,10 +40,14 @@ namespace TradersChamp
         {
             services.AddSingleton<MailService>(); 
             services.AddSingleton<ApplicationDBContext>();
+            services.AddSingleton<Utility>();
+
             services.AddTransient<SignUp>();
             services.AddTransient<Login>();
             services.AddTransient<Users>();
             services.AddTransient<CustomerPortal>();
+            services.AddTransient<AddCar>();
+            services.AddTransient<ViewAllAdmins>();
         }
     }
 }

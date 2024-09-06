@@ -1,16 +1,27 @@
 ﻿using TradersChamp.Data;
 using TradersChamp.Util;
+using Microsoft.Extensions.DependencyInjection;
+using TradersChamp.Enums;
 
 namespace TradersChamp.View.Admin
 {
     public partial class AddCar : Form
     {
+        private readonly IServiceProvider _serviceProvider;
+        private readonly ApplicationDBContext _dbContext;
+        private readonly Utility _utility;
+
         private Panel pnlMain;
+
         public AddCar(Panel pnlMain)
         {
             this.pnlMain = pnlMain;
             InitializeComponent();
             SetTabIndexes();
+
+            _serviceProvider = Program.ServiceProvider;
+            _dbContext = _serviceProvider.GetRequiredService<ApplicationDBContext>();
+            _utility = _serviceProvider.GetRequiredService<Utility>();
         }
 
         private void SetTabIndexes()
@@ -60,20 +71,19 @@ namespace TradersChamp.View.Admin
                 NumOfDoors = txtDoors.Text,
                 SeatingCapacity = txtSeatingCapacity.Text,
                 Price = Convert.ToDouble(txtPrice.Text),
+                Status = CommonStatus.ACTIVE,
                 CreatedAt = DateTime.Now,
                 UpdatedAt = DateTime.Now
 
             };
 
-            using (var db = new ApplicationDBContext())
-            {
-                db.Car.Add(car);
-                db.SaveChanges();
-            }
+            _dbContext.Car.Add(car);
+            _dbContext.SaveChanges();
+
 
             MessageBox.Show("Car saved successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
             this.Close();
-            Utility.LoadForm(new ViewAllCars(pnlMain), pnlMain);
+            _utility.LoadForm(new ViewAllCars(pnlMain), pnlMain);
         }
 
         private void ValidateInputs()

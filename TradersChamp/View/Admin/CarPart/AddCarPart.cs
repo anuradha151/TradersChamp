@@ -1,17 +1,24 @@
 ﻿using TradersChamp.Data;
 using TradersChamp.Model;
 using TradersChamp.Util;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace TradersChamp.View.Admin
 {
     public partial class AddCarPart : Form
     {
+        private readonly IServiceProvider _serviceProvider;
+        private readonly Utility _utility;
+
         private Panel pnlMain;
         public AddCarPart(Panel pnlMain)
         {
             InitializeComponent();
             this.pnlMain = pnlMain;
             SetTabIndexes();
+
+            _serviceProvider = Program.ServiceProvider;
+            _utility = _serviceProvider.GetRequiredService<Utility>();
         }
 
         private void SetTabIndexes()
@@ -37,7 +44,7 @@ namespace TradersChamp.View.Admin
                 db.SaveChanges();
             }
             MessageBox.Show("Car part added successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            Utility.LoadForm(new ViewAllCarParts(pnlMain), pnlMain);
+            _utility.LoadForm(new ViewAllCarParts(pnlMain), pnlMain);
             
         }
 

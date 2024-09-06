@@ -12,16 +12,22 @@ using TradersChamp.Util;
 using TradersChamp.View.Admin;
 using TradersChamp.View.Customer.CarParts;
 using TradersChamp.View.Customer.Order;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace TradersChamp.View.Customer
 {
     public partial class CustomerPortal : Form
     {
+        private readonly IServiceProvider _serviceProvider;
+        private readonly Utility _utility;
         private Users User;
         public CustomerPortal(Users user)
         {
             InitializeComponent();
             this.User = user;
+            _serviceProvider = Program.ServiceProvider;
+            _utility = _serviceProvider.GetRequiredService<Utility>();
+
         }
 
         private void CustomerPortal_Load(object sender, EventArgs e)
@@ -36,12 +42,17 @@ namespace TradersChamp.View.Customer
 
         private void btnCar_Click(object sender, EventArgs e)
         {
-            Utility.LoadForm(new CarView(pnlMain, User), pnlMain);
+            _utility.LoadForm(new CarView(pnlMain, User), pnlMain);
         }
 
         private void btnCarParts_Click(object sender, EventArgs e)
         {
-            Utility.LoadForm(new CarPartsView(pnlMain, User), pnlMain);
+            _utility.LoadForm(new CarPartsView(pnlMain, User), pnlMain);
+        }
+
+        private void btnSettings_Click(object sender, EventArgs e)
+        {
+            _utility.LoadForm(new CustomerSettingsView(this), pnlMain);
         }
     }
 }

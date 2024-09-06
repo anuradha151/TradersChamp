@@ -2,18 +2,28 @@
 using TradersChamp.Model;
 using TradersChamp.Service;
 using TradersChamp.Util;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace TradersChamp.View.Admin.User
 {
     public partial class AddAdmin : Form
     {
-        private MailService MailService = new MailService();
+        private readonly IServiceProvider _serviceProvider;
+        private readonly MailService _mailService;
+        private readonly ApplicationDBContext _dbContext;
+        private readonly Utility _utility;
+
         private Panel pnlMain;
         public AddAdmin(Panel pnlMain)
         {
             InitializeComponent();
             this.pnlMain = pnlMain;
             SetTabIndexes();
+
+            _serviceProvider = Program.ServiceProvider;
+            _mailService = _serviceProvider.GetRequiredService<MailService>();
+            _dbContext = _serviceProvider.GetRequiredService<ApplicationDBContext>();
+            _utility = _serviceProvider.GetRequiredService<Utility>();
         }
 
         private void SetTabIndexes()
@@ -29,25 +39,24 @@ namespace TradersChamp.View.Admin.User
         private void btnSave_Click(object sender, EventArgs e)
         {
             validateInputs();
-            var otp = Utility.GenerateOTPText();
-            using (var db = new ApplicationDBContext())
+            var otp = _utility.GenerateOTP();
+
+            var admin = new Users
             {
-                var admin = new Users
-                {
-                    Username = txtUsername.Text,
-                    FullName = txtFullName.Text,
-                    Email = txtEmail.Text,
-                    Phone = txtPhone.Text,
-                    Role = txtRole.Text,
-                    Otp = otp,
-                    Status = "OTP_NOT_VERIFIED",
-                    CreatedAt = DateTime.Now,
-                    UpdatedAt = DateTime.Now
-                };
-                db.User.Add(admin);
-                db.SaveChanges();
-                MailService.SendEmailAsync(admin.Email, "OTP Verification", "Your OTP is " + otp);
-            }
+                Username = txtUsername.Text,
+                FullName = txtFullName.Text,
+                Email = txtEmail.Text,
+                Phone = txtPhone.Text,
+                Role = txtRole.Text,
+                Otp = otp,
+                Status = "OTP_NOT_VERIFIED",
+                CreatedAt = DateTime.Now,
+                UpdatedAt = DateTime.Now
+            };
+            _dbContext.User.Add(admin);
+            _dbContext.SaveChanges();
+            _mailService.SendEmailAsync(admin.Email, "OTP Verification", "Your OTP is " + otp);
+
             MessageBox.Show("Admin added successfully. OTP has been sent to " + txtEmail.Text, "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
             this.Hide();
 

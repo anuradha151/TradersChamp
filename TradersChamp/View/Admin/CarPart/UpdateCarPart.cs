@@ -1,11 +1,15 @@
 ﻿using TradersChamp.Data;
 using TradersChamp.Model;
 using TradersChamp.Util;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace TradersChamp.View.Admin
 {
     public partial class UpdateCarPart : Form
     {
+        private readonly IServiceProvider _serviceProvider;
+        private readonly Utility _utility;
+
         private Panel pnlMain;
         private Guid id;
         public UpdateCarPart(Panel pnlMain, CarPart carPart)
@@ -14,6 +18,9 @@ namespace TradersChamp.View.Admin
             this.pnlMain = pnlMain;
             UpdateInputs(carPart);
             SetTabIndexes();
+
+            _serviceProvider = Program.ServiceProvider;
+            _utility = _serviceProvider.GetRequiredService<Utility>();
         }
 
         private void SetTabIndexes()
@@ -52,7 +59,7 @@ namespace TradersChamp.View.Admin
                 db.SaveChanges();
             }
             MessageBox.Show("Car part updated successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            Utility.LoadForm(new ViewAllCarParts(pnlMain), pnlMain);
+            _utility.LoadForm(new ViewAllCarParts(pnlMain), pnlMain);
         }
 
         private void txtPrice_KeyPress(object sender, KeyPressEventArgs e)

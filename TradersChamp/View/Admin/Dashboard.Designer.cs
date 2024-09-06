@@ -32,10 +32,12 @@
             btnCar = new Button();
             btnAdminManager = new Button();
             btnSettings = new Button();
+            btnCarOrders = new Button();
             btnCustomer = new Button();
             btnCarParts = new Button();
             lblDashboard = new Label();
             pnlMain = new Panel();
+            btnReport = new Button();
             pnlHeader.SuspendLayout();
             SuspendLayout();
             // 
@@ -44,6 +46,8 @@
             pnlHeader.Controls.Add(btnCar);
             pnlHeader.Controls.Add(btnAdminManager);
             pnlHeader.Controls.Add(btnSettings);
+            pnlHeader.Controls.Add(btnReport);
+            pnlHeader.Controls.Add(btnCarOrders);
             pnlHeader.Controls.Add(btnCustomer);
             pnlHeader.Controls.Add(btnCarParts);
             pnlHeader.Controls.Add(lblDashboard);
@@ -75,13 +79,23 @@
             // 
             // btnSettings
             // 
-            btnSettings.Enabled = false;
             btnSettings.Location = new Point(1496, 12);
             btnSettings.Name = "btnSettings";
             btnSettings.Size = new Size(75, 73);
             btnSettings.TabIndex = 1;
             btnSettings.Text = "Settings";
             btnSettings.UseVisualStyleBackColor = true;
+            btnSettings.Click += btnSettings_Click;
+            // 
+            // btnCarOrders
+            // 
+            btnCarOrders.Location = new Point(404, 12);
+            btnCarOrders.Name = "btnCarOrders";
+            btnCarOrders.Size = new Size(75, 73);
+            btnCarOrders.TabIndex = 1;
+            btnCarOrders.Text = "Car Orders";
+            btnCarOrders.UseVisualStyleBackColor = true;
+            btnCarOrders.Click += btnCarOrders_Click;
             // 
             // btnCustomer
             // 
@@ -122,6 +136,16 @@
             pnlMain.Size = new Size(1583, 583);
             pnlMain.TabIndex = 1;
             // 
+            // btnReport
+            // 
+            btnReport.Location = new Point(485, 12);
+            btnReport.Name = "btnReport";
+            btnReport.Size = new Size(75, 73);
+            btnReport.TabIndex = 1;
+            btnReport.Text = "Reports";
+            btnReport.UseVisualStyleBackColor = true;
+            btnReport.Click += btnCarOrders_Click;
+            // 
             // Dashboard
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -147,5 +171,7 @@
         private Button btnCustomer;
         private Button btnAdminManager;
         private Button btnSettings;
+        private Button btnCarOrders;
+        private Button btnReport;
     }
 }

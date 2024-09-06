@@ -21,14 +21,36 @@ namespace TradersChamp.Service
         {
             try
             {
-                Console.WriteLine("Sending email to: " + toEmail);
                 await client.SendMailAsync("no-reply@abctraders.com", toEmail, subject, body);
-                Console.WriteLine("Email sent successfully to: " + toEmail);
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"Failed to send email: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        public async Task SendEmailWithAttachmentAsync(string toEmail, string subject, string body, string attachmentPath)
+        {
+            try
+            {
+                MailMessage mailMessage = new MailMessage("no-reply@abctraders.com", toEmail, subject, body);
+
+                // Add the attachment if the file exists
+                if (File.Exists(attachmentPath))
+                {
+                    Attachment attachment = new Attachment(attachmentPath);
+                    mailMessage.Attachments.Add(attachment);
+                }
+
+                await client.SendMailAsync(mailMessage);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Failed to send email with attachment: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+
+
     }
 }

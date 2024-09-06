@@ -61,13 +61,13 @@
             // 
             // btnSettings
             // 
-            btnSettings.Enabled = false;
             btnSettings.Location = new Point(1496, 12);
             btnSettings.Name = "btnSettings";
             btnSettings.Size = new Size(75, 73);
             btnSettings.TabIndex = 1;
             btnSettings.Text = "Settings";
             btnSettings.UseVisualStyleBackColor = true;
+            btnSettings.Click += btnSettings_Click;
             // 
             // btnCarParts
             // 
@@ -119,9 +119,9 @@
 
         private Panel pnlHeader;
         private Button btnCar;
-        private Button btnSettings;
         private Button btnCarParts;
         private Label lblDashboard;
         private Panel pnlMain;
+        private Button btnSettings;
     }
 }
